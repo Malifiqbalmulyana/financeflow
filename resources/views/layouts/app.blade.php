@@ -63,28 +63,48 @@
         <!-- Main Content -->
         <main class="main-content">
             <!-- Top Bar -->
-            <header class="top-bar">
-                <div class="top-bar-left">
-                    <nav class="top-nav">
-                        <a href="{{ route('home') }}" class="top-nav-item {{ request()->routeIs('home') ? 'active' : '' }}">Financial Overview</a>
-                        <a href="#" class="top-nav-item">Portfolio</a>
-                        <a href="#" class="top-nav-item">Insights</a>
-                    </nav>
+            <!-- Top Bar -->
+<header class="top-bar">
+    <div class="top-bar-left">
+        <nav class="top-nav">
+            <a href="{{ route('home') }}" class="top-nav-item {{ request()->routeIs('home') ? 'active' : '' }}">Financial Overview</a>
+            <a href="{{ route('budgeting') }}" class="top-nav-item {{ request()->routeIs('budgeting') ? 'active' : '' }}">Portfolio</a>
+            <a href="{{ route('reports') }}" class="top-nav-item {{ request()->routeIs('reports') ? 'active' : '' }}">Insights</a>
+        </nav>
+    </div>
+    <div class="top-bar-right">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search transactions...">
+        </div>
+        <button class="btn-generate-report">Generate Report</button>
+        
+        <!-- User Menu - FIX DI SINI -->
+        <div class="user-menu">
+            @auth
+                <i class="fas fa-bell"></i>
+                <div class="user-avatar">
+                    <span>{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
                 </div>
-                <div class="top-bar-right">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search transactions...">
-                    </div>
-                    <button class="btn-generate-report">Generate Report</button>
-                    <div class="user-menu">
-                        <i class="fas fa-bell"></i>
-                        <div class="user-avatar">
-                            <span>{{ substr(Auth::user()->name, 0, 2) }}</span>
-                        </div>
-                    </div>
+                <div class="dropdown-menu">
+                    <span>{{ Auth::user()->email }}</span>
+                    <a href="{{ route('logout') }}" 
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
-            </header>
+            @else
+                <a href="{{ route('login') }}" class="btn-login">Login</a>
+                @if(Route::has('register'))
+                    <a href="{{ route('register') }}" class="btn-register">Register</a>
+                @endif
+            @endauth
+        </div>
+    </div>
+</header>
             
             <!-- Page Content -->
             <div class="page-content">
