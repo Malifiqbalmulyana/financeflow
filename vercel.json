@@ -1,36 +1,29 @@
 {
   "version": 2,
-  "builds": [
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  },
+  "routes": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "public"
-      }
+      "src": "/(.*)",
+      "dest": "/api/index.php"
     }
   ],
-  "routes": [
-    { "src": "/build/(.*)", "headers": { "Cache-Control": "public, max-age=31536000, immutable" }, "continue": true },
-    { "src": "/(.*)", "dest": "/api/index.php" }
-  ],
+  "outputDirectory": "public",
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "APP_KEY": "base64:...",
-    "DB_CONNECTION": "pgsql",
-    "DB_HOST": "db.jxtmllzhwdvxiykvspfy.supabase.co",
-    "DB_PORT": "5432",
-    "DB_DATABASE": "postgres",
-    "DB_USERNAME": "postgres",
-    "DB_PASSWORD": "nox1907!2005",
-    "SESSION_DRIVER": "cookie",
-    "CACHE_DRIVER": "array",
-    "LOG_CHANNEL": "stderr",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
     "APP_ROUTES_CACHE": "/tmp/routes.php",
     "APP_SERVICES_CACHE": "/tmp/services.php",
-    "VIEW_COMPILED_PATH": "/tmp"
+    "VIEW_COMPILED_PATH": "/tmp",
+    "CACHE_DRIVER": "array",
+    "LOG_CHANNEL": "stderr",
+    "SESSION_DRIVER": "cookie",
+    "DB_CONNECTION": "pgsql"
   }
 }
