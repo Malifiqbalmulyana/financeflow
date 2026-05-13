@@ -1,20 +1,27 @@
-# Laravel
+# Environment
 .env
 .env.local
-public/hot
-public/storage
-storage/*.key
-vendor
-node_modules/
-Homestead.json
-Homestead.yaml
-auth.json
+.env.*.local
 
-# Build tools
-npm-debug.log
-yarn-error.log
+# Database SQLite
+database/database.sqlite
+
+# Dependencies
+vendor/
+node_modules/
 
 # IDE
 .idea/
 .vscode/
-.fleet/
+
+# Logs
+*.log
+
+# Laravel
+public/storage
+public/hot
+storage/*.key
+
+# OS
+.DS_Store
+Thumbs.db
